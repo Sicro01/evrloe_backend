@@ -1,0 +1,6 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.banditEnabled": true,
+    "python.linting.enabled": false,
+    "python.venvPath": "C:\\Users\\770000411\\OneDrive - Genpact\\02 - Personal\\PythonEnvironments"
+}
