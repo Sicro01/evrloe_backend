@@ -21,9 +21,9 @@ def main():
     ps.parse_logfile(data_folder, test_input_log_filename, race_name)
     
     # save data to tables
-    
     sv.save_gps_rows_to_db(ps.gps_lat_lon_rows)
     sv.save_racing_driver_rows_to_db(ps.racing_driver_rows)
+    sv.save_loop_sector_details_rows_to_db(ps.loop_sector_details_rows)
 
     # commit changes to db
     sv.commit_db_changes()

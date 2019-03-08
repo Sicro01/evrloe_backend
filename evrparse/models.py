@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateTime, Float, Table
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateTime, Float, Table, ForeignKeyConstraint
 # from evrparse.createdb import Base
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
@@ -7,39 +7,40 @@ from sqlalchemy.orm import sessionmaker, relationship
 Base = declarative_base()
 
 # decalre classes to capture in db
-
-
 class Race(Base):
     __tablename__ = 'race'
 
-    id = Column('id', Integer, primary_key=True, autoincrement=True)
-    race_number = Column('race_number', Integer, nullable=False)
-    season_number = Column('season_number', Integer, nullable=False)
+    race_number = Column('race_number', Integer, primary_key=True)
+    season_number = Column('season_number', Integer, primary_key=True)
     race_location_short = Column('race_location_short', String(3), nullable=False)
     race_location_long = Column('race_location_long', String(20), nullable=False)
-    racing_drivers = relationship('Racing_Driver') 
 
 class Racing_Driver(Base):
     __tablename__ = 'racing_driver'
 
-    id = Column('id', Integer, primary_key=True, autoincrement=True)
-    race_id = Column(Integer, ForeignKey('race.id'))
-    driver_number = Column('driver_number', Integer, nullable=False)
+    driver_number = Column('driver_number', Integer, primary_key=True)
+    race_number = Column('race_number', Integer, primary_key=True)
+    season_number = Column('season_number', Integer, primary_key=True)
     driver_firstname = Column('driver_firstname', String(20), nullable=False)
     driver_lastname = Column('driver_lastname', String(30), nullable=False)
     driver_shortname = Column('driver_shortname', String(3), nullable=False)
     driver_team = Column('driver_team', String(100))
     driver_vehicle = Column('driver_vehicle', String(100))
+    ForeignKeyConstraint(['race_number', 'season_number'], ['race.race_number', 'race.season_number'])
 
-class Lap(Base):
-    __tablename__ = 'lap'
+class Driver_Lap(Base):
+    __tablename__ = 'driver_lap'
 
-    id = Column('id', Integer, primary_key=True, autoincrement=True)
-    racing_driver_id = Column(Integer, ForeignKey('racing_driver.id'))
-    lap_number = Column('lap_number', Integer, nullable=False)
-    lap_time = Column('lap_time', Float, nullable=False)
-    lap_position = Column('lap_position', Integer, nullable=False)
-
+    driver_number = Column('driver_number', Integer, primary_key=True)
+    race_number = Column('race_number', Integer, primary_key=True)
+    season_number = Column('season_number', Integer, primary_key=True)
+    lap_number = Column('lap_number', Integer, primary_key=True)
+    lap_loop_sector_key = Column('lap_loop_sector_key', String(6), primary_key=True)
+    lap_loop_sector_number = Column('lap_loop_sector_number', Integer, primary_key=True)
+    lap_datetime = Column('lap_datetime', DateTime, nullable=False)
+    lap_loop_sector_time = Column('lap_loop_sector_time', Integer, nullable=False)
+    ForeignKeyConstraint(['driver_number', 'race_number', 'season_number'], ['racing_driver.driver_number',
+     'racing_driver.race_number', 'racing_driver.season_number'])
 
 class GPS_Lat_Lon(Base):
     __tablename__ = 'gps_lat_lon'
