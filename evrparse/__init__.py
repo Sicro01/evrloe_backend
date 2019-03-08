@@ -23,9 +23,9 @@ def main():
     sv.save_race_rows()
     sv.save_gps_rows(ps.gps_lat_lon_rows)
     sv.save_racing_driver_rows(ps.racing_driver_rows)
-    # sv.save_driver_lap_detail_rows(ps.loop_sector_details_rows)
+    sv.save_driver_lap_detail_rows(ps.loop_sector_details_rows)
     sv.save_driver_lap_summary_rows(ps.liveevents_pitdetails_rows)
-    sv.print_lap_leader()
+    # sv.print_lap_leader()
 
     # commit changes to db
     sv.commit_db_changes()

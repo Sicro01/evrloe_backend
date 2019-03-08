@@ -230,7 +230,7 @@ def parse_logfile(data_folder, input_log_filename, race_name):
 #     [print('\n', x) for x in gps_lat_lon_rows]
 #     [print('\n', x) for x in rgps_lat_lon_rows]
 #     [print('\n', x) for x in weather_rows]
-    # [print('\n',x) for x in liveevents_pitdetails_rows]
-    # [print('\n',x) for x in loop_sector_details_rows]
+#     [print('\n',x) for x in liveevents_pitdetails_rows]
+#     [print('\n',x) for x in loop_sector_details_rows]
 #     [print('\n',x) for x in power_mode_rows]
 
