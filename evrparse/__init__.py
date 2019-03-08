@@ -1,12 +1,12 @@
-# import json
-# from pathlib import Path
-# from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-# from sqlalchemy.ext.declarative import declarative_base
-# from sqlalchemy.orm import sessionmaker, relationship
-import evrparse.parse as parse
+import evrparse.parse as ps
+# import evrparse.models as md
+# from evrparse.createdb import Base, engine
+import evrparse.savetodb as sv
+
 
 
 def main():
+    
     # test and full source files
     test_input_log_filename = 'S05R02MAR_Alkamel_FE_R - Test.log' # set name of file
     full_input_log_filename = 'S05R02MAR_Alkamel_FE_R - Full.log' # set name of file
@@ -18,34 +18,14 @@ def main():
     race_name = 'S05R02MAR'
 
     # parse the log file and store results in dataframes - pass full source data path and race name
-    parse.parse_logfile(data_folder, test_input_log_filename, race_name)
+    ps.parse_logfile(data_folder, test_input_log_filename, race_name)
+    
+    # save data to tables
+    
+    sv.save_gps_rows_to_db(ps.gps_lat_lon_rows)
+    sv.save_racing_driver_rows_to_db(ps.racing_driver_rows)
 
+    # commit changes to db
+    sv.commit_db_changes()
 
-
-
-    # Base = declarative_base()
-    #
-    #
-    # class User(Base):
-    #
-    #     __tablename__ = 'person'
-    #
-    #     id = Column('id', Integer, primary_key=True)
-    #     username = Column('username', String, unique=True)
-    #
-    #
-    # engine = create_engine('sqlite:///users.db', echo=True)
-    # Base.metadata.create_all(bind=engine)
-    # Session = sessionmaker(bind=engine)
-    #
-    # session = Session()
-    # users = session.query(User).all()
-    # for user in users:
-    #     print('User with username {} and id {}'.format(user.username, user.id))
-    # user = User()
-    # # user.id = 0
-    # user.username = 'alice'
-    #
-    # session.add(user)
-    # session.commit()
-    # session.close()
+    
