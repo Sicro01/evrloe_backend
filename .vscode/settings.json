@@ -1,6 +1,6 @@
 {
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
-  "python.pythonPath": "C:\\Users\\770000411\\OneDrive - Genpact\\02 - Personal\\PythonEnvironments\\evrloe_backend_env\\Scripts\\python.exe",
-  "python.venvPath": "C:\\Users\\770000411\\OneDrive - Genpact\\02 - Personal\\PythonEnvironments"
+  "python.pythonPath": "D:\\Simon\\Documents\\pythonenvironments\\evrloe_backend_env\\Scripts\\python.exe",
+  "python.venvPath": "D:\\Simon\\Documents\\PythonEnvironments"
 }

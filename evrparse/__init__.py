@@ -12,7 +12,7 @@ def main():
     full_input_log_filename = 'S05R02MAR_Alkamel_FE_R - Full.log' # set name of file
 
     # folder where the 'Source' and 'Output' folder must already exist
-    data_folder = "C:/Users/770000411/OneDrive - Genpact/02 - Personal/Jupyter Projects/EVR/Data/" # set path to file"
+    data_folder = "D:/Simon/Documents/pythonprojects/evrloe_backend/" # set path to file"
 
     # name of race related to the data we're parsing
     race_name = 'S05R02MAR'
