@@ -104,47 +104,47 @@ def parse_logfile(data_folder, input_log_filename, race_name):
             elif line_key == 'timing':
 
                 for timing_key, timing_value in line_value.items():
-
+                    
                     if timing_key == 'liveEvents':
-
+                         
                         liveevents_pitdetails_items = []
 
                         for liveevents_pitin_key, liveevents_pitin_value in timing_value.items():
 
                             for liveevents_pitdetails_key, liveevents_pitdetails_value in liveevents_pitin_value.items():
-                                liveevents_pitdetails_item = [
-                                    liveevents_pitdetails_key, liveevents_pitdetails_value]
-                                liveevents_pitdetails_items.extend(
-                                    liveevents_pitdetails_item)
 
-                            liveevents_pitdetails_items = [date_times[cnt], line_key, timing_key, liveevents_pitin_key] \
-                                                          + liveevents_pitdetails_items
+                                if liveevents_pitdetails_key in ['participant', 'lapTime', 'elapsedTime', 'lapNumber']:
+                                
+                                    liveevents_pitdetails_item = [liveevents_pitdetails_value]
+                                    liveevents_pitdetails_items.extend(liveevents_pitdetails_item)
+                                
+                            liveevents_pitdetails_items = [date_times[cnt]] + liveevents_pitdetails_items
                             liveevents_pitdetails_rows.append(
                                 liveevents_pitdetails_items)
 
                     if timing_key == 'analysis':
-
+                        
                         for lap_key, lap_value in timing_value.items():
-
+                           
                             if lap_key == 'laps':
 
                                 for driver_key, driver_details_value in lap_value.items():
-
+                                    
                                     for timing_details_key, timing_details_value in driver_details_value.items():
 
                                         if timing_details_key == 'laps':
 
                                             for driver_number_key, driver_number_details in timing_details_value.items():
-
+                                                
                                                 for loop_sectors_key, loop_sectors_value in driver_number_details.items():
-
+                                                    
                                                     if loop_sectors_key == 'lapNum':
                                                         lap_num = loop_sectors_value
                                                         current_lap_num = loop_sectors_value
 
                                                     if loop_sectors_key == 'driverLapNum':
                                                         driver_lap_num = loop_sectors_value
-
+                                                    
                                                     if loop_sectors_key in ['loopSectors', 'sectors']:
 
                                                         loop_sector_details_items = []
@@ -165,6 +165,7 @@ def parse_logfile(data_folder, input_log_filename, race_name):
                                                                                          driver_key, driver_lap_num,
                                                                                          lap_num,
                                                                                          loop_sector_key] + loop_sector_details_items
+                                                            
                                                             loop_sector_details_rows.append(
                                                                 loop_sector_details_items)
                     if timing_key == 'session':
@@ -229,7 +230,7 @@ def parse_logfile(data_folder, input_log_filename, race_name):
 #     [print('\n', x) for x in gps_lat_lon_rows]
 #     [print('\n', x) for x in rgps_lat_lon_rows]
 #     [print('\n', x) for x in weather_rows]
-#     [print('\n',x) for x in liveevents_pitdetails_rows]
-#     [print('\n',x) for x in loop_sector_details_rows]
+    # [print('\n',x) for x in liveevents_pitdetails_rows]
+    # [print('\n',x) for x in loop_sector_details_rows]
 #     [print('\n',x) for x in power_mode_rows]
 

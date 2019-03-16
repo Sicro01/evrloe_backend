@@ -28,8 +28,8 @@ class Racing_Driver(Base):
     driver_vehicle = Column('driver_vehicle', String(100))
     ForeignKeyConstraint(['race_number', 'season_number'], ['race.race_number', 'race.season_number'])
 
-class Driver_Lap(Base):
-    __tablename__ = 'driver_lap'
+class Driver_Lap_Detail(Base):
+    __tablename__ = 'driver_lap_detail'
 
     driver_number = Column('driver_number', Integer, primary_key=True)
     race_number = Column('race_number', Integer, primary_key=True)
@@ -39,6 +39,21 @@ class Driver_Lap(Base):
     lap_loop_sector_number = Column('lap_loop_sector_number', Integer, primary_key=True)
     lap_datetime = Column('lap_datetime', DateTime, nullable=False)
     lap_loop_sector_time = Column('lap_loop_sector_time', Integer, nullable=False)
+    lap_time = Column('lap_time', Integer, nullable=True)
+    elapsed_time = Column('elapsed_time', Integer, nullable=True)
+    ForeignKeyConstraint(['driver_number', 'race_number', 'season_number'], ['racing_driver.driver_number',
+     'racing_driver.race_number', 'racing_driver.season_number'])
+
+class Driver_Lap_Summary(Base):
+    __tablename__ = 'driver_lap_summary'
+
+    driver_number = Column('driver_number', Integer, primary_key=True)
+    race_number = Column('race_number', Integer, primary_key=True)
+    season_number = Column('season_number', Integer, primary_key=True)
+    lap_number = Column('lap_number', Integer, primary_key=True)
+    lap_time = Column('lap_time', Integer, nullable=False)
+    elapsed_time = Column('elapsed_time', Integer, nullable=False)
+    lap_datetime = Column('lap_datetime', DateTime, nullable=False)
     ForeignKeyConstraint(['driver_number', 'race_number', 'season_number'], ['racing_driver.driver_number',
      'racing_driver.race_number', 'racing_driver.season_number'])
 
